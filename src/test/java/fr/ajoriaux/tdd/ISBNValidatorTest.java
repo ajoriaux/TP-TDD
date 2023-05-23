@@ -20,6 +20,11 @@ public class ISBNValidatorTest {
 	}
 	
 	@Test
+	public void shouldHaveOnlyDigits() {
+		assertThrows(NumberFormatException.class, () -> validator.validateISBN("271449A323"));
+	}
+	
+	@Test
 	public void checkValidISBN() {
 		assertTrue(validator.validateISBN("2714493238"));
 	}
