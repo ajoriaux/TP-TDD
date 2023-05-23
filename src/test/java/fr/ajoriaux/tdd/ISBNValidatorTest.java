@@ -28,4 +28,9 @@ public class ISBNValidatorTest {
 	public void checkValidISBN() {
 		assertTrue(validator.validateISBN("2714493238"));
 	}
+	
+	@Test
+	public void lastCharactercanBeX() {
+		assertTrue(validator.validateISBN("222647272X"));
+	}
 }
