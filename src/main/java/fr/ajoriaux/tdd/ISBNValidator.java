@@ -8,6 +8,7 @@ public class ISBNValidator {
 		int total = 0;
 		
 		for (int i = 0; i< 10; i++) {
+			if (!Character.isDigit(isbn.charAt(i))) throw new NumberFormatException("An ISBN should only contains digits.");
 			total += isbn.charAt(i) * (10-i);
 		}
 		
