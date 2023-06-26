@@ -46,7 +46,7 @@ class BookValidatorTest {
 		String isbn = "2714493238";
 		Book book = new Book(isbn, "Nouveau titre", "Auteur", "Belfond", "Broché", false);
 		when(dbService.getBookData(isbn)).thenReturn(new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true));
+		verify(dbService).getBookData(isbn);
 		assertTrue(manager.updateBook(book));
-		verify(webService).getBookData(isbn);
 	}
 }
