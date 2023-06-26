@@ -34,10 +34,19 @@ class BookValidatorTest {
 	}
 	
 	@Test
-	public void searchDatabaseIfDataMissingDuringCreation() {
+	public void searchWebServiceIfDataMissingDuringCreation() {
 		String isbn = "2714493238";
 		when(webService.getBookData(isbn)).thenReturn(new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true));
 		manager.setNewBook(new Book(isbn, "", "", "", "", true));
+		verify(webService).getBookData(isbn);
+	}
+	
+	@Test
+	public void updateDataBookFromDatabase() {
+		String isbn = "2714493238";
+		Book book = new Book(isbn, "Nouveau titre", "Auteur", "Belfond", "Broché", false);
+		when(dbService.getBookData(isbn)).thenReturn(new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true));
+		assertTrue(manager.updateBook(book));
 		verify(webService).getBookData(isbn);
 	}
 }
