@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -25,14 +26,10 @@ class BookValidatorTest {
 	}
 	
 	@Test
-	public void bookInDatabase() {
+	public void bookInDatabase() throws NotFoundException {
 		String isbn = "2714493238";
-        dbService = new BookDataService() {
-           @Override
-           public Book getBookData(String isbn) {
-               return new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
-           }
-       };
-       verify(dbService).getBookData(isbn);
+		when(dbService.getBookData(isbn)).thenReturn(new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true));
+		manager.getLocator(isbn);
+		verify(dbService).getBookData(isbn);
 	}
 }
