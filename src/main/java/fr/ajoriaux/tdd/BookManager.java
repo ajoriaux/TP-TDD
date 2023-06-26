@@ -27,4 +27,12 @@ public class BookManager {
                 + book.getTitle().split(" ").length;
         return locator;
     }
+    
+    public void setNewBook(Book book) {
+    	if ("" == book.getTitle() || "" == book.getAuthor() ||
+    		"" == book.getAuthor() || "" == book.getFormat()) {
+    		book = webBookDataService.getBookData(book.getIsbn());
+    	}
+    	dbBookDataService.addBook(book);
+    }
 }
