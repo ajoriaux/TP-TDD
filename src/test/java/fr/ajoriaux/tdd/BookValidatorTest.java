@@ -3,6 +3,7 @@ package fr.ajoriaux.tdd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -50,5 +51,15 @@ class BookValidatorTest {
 		manager.updateBook(book);
 		verify(dbService).getBookData(isbn);
 		assertTrue(manager.updateBook(book));
+	}
+	
+	@Test
+	public void oldDataMustBeDifferentFromNewData() {
+		String isbn = "2714493238";
+		Book book = new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
+		when(dbService.getBookData(isbn)).thenReturn(book);
+		manager.updateBook(book);
+		verify(dbService).getBookData(isbn);
+		assertFalse(manager.updateBook(book));
 	}
 }
