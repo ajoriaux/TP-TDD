@@ -48,4 +48,13 @@ class ReservationValidatorTest {
 		manager.searchReservation(id);
 		assertEquals(reservation, dbService.getReservation(id));
 	}
+	
+	/// Suppression d'une réservation 
+	@Test
+	public void removeReservationFromDatabase() {
+		String id = "1";
+		manager.removeReservation(id);
+		verify(dbService).removeReservation(id);
+		assertTrue(manager.removeReservation(id));
+	}
 }
