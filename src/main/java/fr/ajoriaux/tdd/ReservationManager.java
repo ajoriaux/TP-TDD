@@ -15,4 +15,9 @@ public class ReservationManager {
     	dbReservationDataService.createReservation(reservation);
     	return true;
     }
+    
+    public Reservation searchReservation(String id) {
+    	Reservation reservation = dbReservationDataService.getReservation(id);
+    	return reservation;
+    }
 }
