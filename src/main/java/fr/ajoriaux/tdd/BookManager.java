@@ -36,8 +36,27 @@ public class BookManager {
     	dbBookDataService.addBook(book);
     }
     
-    public boolean updateBook(Book book) {
-    	
+    public boolean updateBook(Book newBook) {
+    	Book book = dbBookDataService.getBookData(newBook.getIsbn());
+    	if (!(newBook.getTitle() == book.getTitle())) {
+    		book.setTitle(newBook.getTitle());
+    	}
+    	if (!(newBook.getAuthor() == book.getAuthor())) {
+    		book.setAuthor(newBook.getAuthor());
+    	}
+    	if (!(newBook.getEditor() == book.getEditor())) {
+    		book.setTitle(newBook.getTitle());
+    	}
+    	if (!(newBook.getEditor() == book.getTitle())) {
+    		book.setEditor(newBook.getEditor());
+    	}
+    	if (!(newBook.getFormat() == book.getFormat())) {
+    		book.setFormat(newBook.getFormat());
+    	}
+    	if (!(newBook.isAvailable() == book.isAvailable())) {
+    		book.setAvailable(newBook.isAvailable());
+    	}
+    	dbBookDataService.updateBook(book);
     	return true;
     }
 }
