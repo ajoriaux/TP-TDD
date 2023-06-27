@@ -37,4 +37,14 @@ class MemberValidatorTest {
 		verify(dbService).createMember(member);
 		assertTrue(manager.addMember(member));
 	}
+	
+	/// modification d'un adhérent 
+	@Test
+	public void updateMemberInDatabase() {
+		String code = "MEM1";
+		Member member = new Member(code, "Henry", "Pauline", new Date(1984, 4, 8), "Mme");
+		manager.updateMember(member);
+		verify(dbService).updateMember(member);
+		assertTrue(manager.updateMember(member));
+	}
 }
