@@ -3,9 +3,11 @@ package fr.ajoriaux.tdd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.sql.Date;
 
@@ -33,5 +35,17 @@ class ReservationValidatorTest {
 		manager.addReservation(reservation);
 		verify(dbService).createReservation(reservation);
 		assertTrue(manager.addReservation(reservation));
+	}
+	
+	/// Recherche adhérent par code
+	@Test
+	public void searchReservation() {
+		String id = "1";
+		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
+		Member member = new Member("MEM1", "Henry", "Thierry", new Date(1984, 4, 8), "M");
+		Reservation reservation = new Reservation(id, member, book, new Date(2023, 5, 26), new Date(2023, 9, 26));
+		when(dbService.getReservation(id)).thenReturn(reservation);
+		manager.searchReservation(id);
+		assertEquals(reservation, dbService.getReservation(id));
 	}
 }
