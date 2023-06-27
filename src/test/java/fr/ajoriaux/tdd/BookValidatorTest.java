@@ -30,6 +30,7 @@ class BookValidatorTest {
         manager.setWebBookDataService(webService);
 	}
 	
+	/// Recherche de livre(s) dans la base de donnée (par isbn, titre, ou auteur)  
 	@Test
 	public void searchBookInDatabaseByIsbn() {
 		String isbn = "2714493238";
@@ -59,18 +60,12 @@ class BookValidatorTest {
 		assertEquals(books, dbService.getBookDataByAuthor(author));
 	}
 	
+	/// Création d'un livre 
 	@Test
 	public void formatMustBeValidForCreation() {
 		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "format", true);
 		manager.setNewBook(book);
 		assertFalse(manager.setNewBook(book));
-	}
-	
-	@Test
-	public void formatMustBeValidForUpdate() {
-		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "format", false);
-		manager.updateBook(book);
-		assertFalse(manager.updateBook(book));
 	}
 	
 	@Test
@@ -82,6 +77,14 @@ class BookValidatorTest {
 		verify(webService).getBookData(isbn);
 		verify(dbService).addBook(book);
 		assertTrue(manager.setNewBook(book));
+	}
+	
+	/// Modification d'un livre
+	@Test
+	public void formatMustBeValidForUpdate() {
+		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "format", false);
+		manager.updateBook(book);
+		assertFalse(manager.updateBook(book));
 	}
 	
 	@Test
@@ -104,6 +107,7 @@ class BookValidatorTest {
 		assertFalse(manager.updateBook(book));
 	}
 	
+	/// Suppression d'un livre
 	@Test
 	public void removeBookFromDatabase() {
 		String isbn = "2714493238";
