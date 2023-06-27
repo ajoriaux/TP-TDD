@@ -43,10 +43,15 @@ public class BookManager {
     }
     
     public boolean updateBook(Book newBook) {
+    	if (newBook.getFormat() != "Poche" && newBook.getFormat() != "Broché" && newBook.getFormat() != "Grand Format") {
+    		return false;
+    	}
+    	
     	Book book = dbBookDataService.getBookData(newBook.getIsbn());
     	if (book == newBook) {
     		return false;
     	}
+    	
     	if (!(newBook.getTitle() == book.getTitle())) {
     		book.setTitle(newBook.getTitle());
     	}
@@ -65,6 +70,7 @@ public class BookManager {
     	if (!(newBook.isAvailable() == book.isAvailable())) {
     		book.setAvailable(newBook.isAvailable());
     	}
+    	
     	dbBookDataService.updateBook(book);
     	return true;
     }
