@@ -6,4 +6,6 @@ public interface BookDataService {
     void addBook(Book book);
     
     void updateBook(Book book);
+    
+    void removeBook(String isbn);
 }

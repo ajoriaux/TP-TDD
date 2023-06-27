@@ -63,4 +63,9 @@ public class BookManager {
     	dbBookDataService.updateBook(book);
     	return true;
     }
+    
+    public boolean removeBook(String isbn) {
+    	dbBookDataService.removeBook(isbn);
+    	return true;
+    }
 }
