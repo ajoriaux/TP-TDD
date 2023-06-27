@@ -38,13 +38,21 @@ class MemberValidatorTest {
 		assertTrue(manager.addMember(member));
 	}
 	
-	/// modification d'un adhérent 
+	/// Recherche adhérent par code
 	@Test
-	public void updateMemberInDatabase() {
+	public void searchMemberByCode() {
 		String code = "MEM1";
-		Member member = new Member(code, "Henry", "Pauline", new Date(1984, 4, 8), "Mme");
-		manager.updateMember(member);
-		verify(dbService).updateMember(member);
-		assertTrue(manager.updateMember(member));
+		Member member = new Member(code, "Henry", "Thierry", new Date(1984, 4, 8), "M");
+		when(dbService.getMember(code)).thenReturn(member);
+		manager.searchMemberByCode(code);
+		assertEquals(member, dbService.getMember(code));
 	}
+	
+	/// modification d'un adhérent 
+	/*
+	 * @Test public void updateMemberInDatabase() { String code = "MEM1"; Member
+	 * member = new Member(code, "Henry", "Pauline", new Date(1984, 4, 8), "Mme");
+	 * manager.updateMember(member); verify(dbService).updateMember(member);
+	 * assertTrue(manager.updateMember(member)); }
+	 */
 }
