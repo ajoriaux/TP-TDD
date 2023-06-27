@@ -35,4 +35,9 @@ public class BookManager {
     	}
     	dbBookDataService.addBook(book);
     }
+    
+    public boolean updateBook(Book book) {
+    	
+    	return true;
+    }
 }
