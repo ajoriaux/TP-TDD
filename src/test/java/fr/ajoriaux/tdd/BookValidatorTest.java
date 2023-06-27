@@ -3,6 +3,7 @@ package fr.ajoriaux.tdd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -31,9 +32,10 @@ class BookValidatorTest {
 	@Test
 	public void bookInDatabase() throws NotFoundException {
 		String isbn = "2714493238";
-		when(dbService.getBookData(isbn)).thenReturn(new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true));
+		Book book = new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
+		when(dbService.getBookData(isbn)).thenReturn(book);
 		manager.getLocator(isbn);
-		verify(dbService).getBookData(isbn);
+		assertEquals(book, dbService.getBookData(isbn));
 	}
 	
 	@Test
