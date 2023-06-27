@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.sql.Date;
@@ -21,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ReservationValidatorTest {
 	ReservationDataService dbService;
 	ReservationManager manager;
+	Book book;
+	Member member;
 	
 	@BeforeEach
 	public void initMocks() {
@@ -28,13 +28,15 @@ class ReservationValidatorTest {
         
         manager = new ReservationManager();
         manager.setDatabaseReservationDataService(dbService);
+        
+
+		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
+		Member member = new Member("MEM1", "Henry", "Thierry", new Date(1984, 4, 8), "M");
 	}
 	
 	/// Ajout d'une réservation 
 	@Test
 	public void addReservationToDatabase() {
-		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
-		Member member = new Member("MEM1", "Henry", "Thierry", new Date(1984, 4, 8), "M");
 		Reservation reservation = new Reservation("1", member, book, new Date(2023, 5, 26), new Date(2023, 9, 26));
 		manager.addReservation(reservation, member.getCode());
 		verify(dbService).createReservation(reservation);
@@ -42,10 +44,7 @@ class ReservationValidatorTest {
 	}
 	
 	@Test
-	public void MemberCannotHaveMoreThanThreeReservations() {
-		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
-		Member member = new Member("MEM1", "Henry", "Thierry", new Date(1984, 4, 8), "M");
-		
+	public void MemberCannotHaveMoreThanThreeReservations() {		
 		ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 		reservations.add(new Reservation("1", member, book, new Date(2023, 5, 26), new Date(2023, 9, 26)));
 		reservations.add(new Reservation("2", member, book, new Date(2023, 5, 12), new Date(2023, 9, 12)));
@@ -62,8 +61,6 @@ class ReservationValidatorTest {
 	@Test
 	public void searchReservation() {
 		String id = "1";
-		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
-		Member member = new Member("MEM1", "Henry", "Thierry", new Date(1984, 4, 8), "M");
 		Reservation reservation = new Reservation(id, member, book, new Date(2023, 5, 26), new Date(2023, 9, 26));
 		when(dbService.getReservation(id)).thenReturn(reservation);
 		manager.searchReservation(id);
