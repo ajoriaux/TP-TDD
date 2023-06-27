@@ -20,4 +20,9 @@ public class ReservationManager {
     	Reservation reservation = dbReservationDataService.getReservation(id);
     	return reservation;
     }
+    
+    public boolean removeReservation(String id) {
+    	dbReservationDataService.removeReservation(id);
+    	return true;
+    }
 }

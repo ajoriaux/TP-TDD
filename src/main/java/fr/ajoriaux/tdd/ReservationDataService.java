@@ -4,4 +4,6 @@ public interface ReservationDataService {
     void createReservation(Reservation reservation);
 
     Reservation getReservation(String id);
+
+    void removeReservation(String id);
 }
