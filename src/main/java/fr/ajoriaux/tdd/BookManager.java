@@ -28,12 +28,13 @@ public class BookManager {
         return locator;
     }
     
-    public void setNewBook(Book book) {
+    public boolean setNewBook(Book book) {
     	if ("" == book.getTitle() || "" == book.getAuthor() ||
     		"" == book.getAuthor() || "" == book.getFormat()) {
     		book = webBookDataService.getBookData(book.getIsbn());
     	}
     	dbBookDataService.addBook(book);
+    	return true;
     }
     
     public boolean updateBook(Book newBook) {

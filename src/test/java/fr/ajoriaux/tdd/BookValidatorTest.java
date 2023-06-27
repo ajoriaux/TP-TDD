@@ -38,9 +38,12 @@ class BookValidatorTest {
 	@Test
 	public void searchWebServiceIfDataMissingDuringCreation() {
 		String isbn = "2714493238";
-		when(webService.getBookData(isbn)).thenReturn(new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true));
+		Book book = new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
+		when(webService.getBookData(isbn)).thenReturn(book);
 		manager.setNewBook(new Book(isbn, "", "", "", "", true));
 		verify(webService).getBookData(isbn);
+		verify(dbService).addBook(book);
+		assertTrue(manager.setNewBook(book));
 	}
 	
 	@Test
@@ -61,5 +64,5 @@ class BookValidatorTest {
 		manager.updateBook(book);
 		verify(dbService).getBookData(isbn);
 		assertFalse(manager.updateBook(book));
-	}
+	}	
 }
