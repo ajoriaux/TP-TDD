@@ -10,6 +10,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import java.util.ArrayList;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -41,19 +42,21 @@ class BookValidatorTest {
 	@Test
 	public void searchBookInDatabaseByTitle() {
 		String title = "Et c'est ainsi que nous vivrons";
-		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
-		when(dbService.getBookDataByTitle(title)).thenReturn(book);
+		ArrayList<Book> books = new ArrayList<Book>();
+		books.add(new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true));
+		when(dbService.getBookDataByTitle(title)).thenReturn(books);
 		manager.searchBookByTitle(title);
-		assertEquals(book, dbService.getBookDataByTitle(title));
+		assertEquals(books, dbService.getBookDataByTitle(title));
 	}
 	
 	@Test
 	public void searchBookInDatabaseByAuthor() {
 		String author = "Douglas Kennedy";
-		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
-		when(dbService.getBookDataByAuthor(author)).thenReturn(book);
+		ArrayList<Book> books = new ArrayList<Book>();
+		books.add(new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true));
+		when(dbService.getBookDataByAuthor(author)).thenReturn(books);
 		manager.searchBookByAuthor(author);
-		assertEquals(book, dbService.getBookDataByAuthor(author));
+		assertEquals(books, dbService.getBookDataByAuthor(author));
 	}
 	
 	@Test

@@ -1,11 +1,13 @@
 package fr.ajoriaux.tdd;
 
+import java.util.ArrayList;
+
 public interface BookDataService {
     Book getBookData(String isbn);
 
-    Book getBookDataByTitle(String title);
+    ArrayList<Book> getBookDataByTitle(String title);
 
-    Book getBookDataByAuthor(String author);
+    ArrayList<Book> getBookDataByAuthor(String author);
     
     void addBook(Book book);
     

@@ -1,5 +1,7 @@
 package fr.ajoriaux.tdd;
 
+import java.util.ArrayList;
+
 public class BookManager {
     private BookDataService dbBookDataService;
     
@@ -22,14 +24,14 @@ public class BookManager {
 		return book;
     }
     
-    public Book searchBookByTitle(String title) {
-        Book book = dbBookDataService.getBookDataByTitle(title);
-		return book;
+    public ArrayList<Book> searchBookByTitle(String title) {
+    	ArrayList<Book> books = dbBookDataService.getBookDataByTitle(title);
+		return books;
     }
     
-    public Book searchBookByAuthor(String author) {
-        Book book = dbBookDataService.getBookDataByAuthor(author);
-		return book;
+    public ArrayList<Book> searchBookByAuthor(String author) {
+    	ArrayList<Book> books = dbBookDataService.getBookDataByAuthor(author);
+		return books;
     }
     
     public boolean setNewBook(Book book) {
