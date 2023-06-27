@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -72,5 +73,13 @@ class BookValidatorTest {
 		manager.removeBook(isbn);
 		verify(dbService).removeBook(isbn);
 		assertTrue(manager.removeBook(isbn));
+	}
+	
+	@Test
+	public void isbnCannotBeEmptyForDeletion() {
+		String isbn = "";
+		manager.removeBook(isbn);
+		verifyNoInteractions(dbService);
+		assertFalse(manager.removeBook(isbn));
 	}
 }
