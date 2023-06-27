@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.sql.Date;
@@ -35,9 +36,9 @@ class ReservationValidatorTest {
 		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
 		Member member = new Member("MEM1", "Henry", "Thierry", new Date(1984, 4, 8), "M");
 		Reservation reservation = new Reservation("1", member, book, new Date(2023, 5, 26), new Date(2023, 9, 26));
-		manager.addReservation(reservation);
+		manager.addReservation(reservation, member.getCode());
 		verify(dbService).createReservation(reservation);
-		assertTrue(manager.addReservation(reservation));
+		assertTrue(manager.addReservation(reservation, member.getCode()));
 	}
 	
 	@Test
@@ -52,10 +53,9 @@ class ReservationValidatorTest {
 		Reservation reservation = new Reservation("4", member, book, new Date(2023, 5, 26), new Date(2023, 9, 26));
 		when(dbService.getReservationsByMember(reservation.getMember().getCode())).thenReturn(reservations);
 		
-		manager.addReservation(reservation);
-		verify(dbService).getReservationsByMember(reservation.getMember().getCode());
-		verifyNoInteractions(dbService).createReservation(reservation);
-		assertFalse(manager.addReservation(reservation));
+		manager.addReservation(reservation, member.getCode());
+		verify(dbService).getReservationsByMember(member.getCode());
+		assertFalse(manager.addReservation(reservation, member.getCode()));
 	}
 	
 	/// Recherche adhérent par code

@@ -1,5 +1,7 @@
 package fr.ajoriaux.tdd;
 
+import java.util.ArrayList;
+
 public class ReservationManager {
     private ReservationDataService dbReservationDataService;
 
@@ -11,7 +13,12 @@ public class ReservationManager {
         this.dbReservationDataService = dbReservationDataService;
     }
     
-    public boolean addReservation(Reservation reservation) {
+    public boolean addReservation(Reservation reservation, String memberId) {
+    	ArrayList<Reservation> reservations = dbReservationDataService.getReservationsByMember(memberId);
+    	if (2 < reservations.size()) {
+    		return false;
+    	}
+    	
     	dbReservationDataService.createReservation(reservation);
     	return true;
     }
