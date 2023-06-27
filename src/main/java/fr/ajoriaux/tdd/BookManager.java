@@ -65,6 +65,9 @@ public class BookManager {
     }
     
     public boolean removeBook(String isbn) {
+    	if ("" == isbn) {
+    		return false;
+    	}
     	dbBookDataService.removeBook(isbn);
     	return true;
     }
