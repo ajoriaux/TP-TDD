@@ -38,6 +38,9 @@ public class BookManager {
     
     public boolean updateBook(Book newBook) {
     	Book book = dbBookDataService.getBookData(newBook.getIsbn());
+    	if (book == newBook) {
+    		return false;
+    	}
     	if (!(newBook.getTitle() == book.getTitle())) {
     		book.setTitle(newBook.getTitle());
     	}
