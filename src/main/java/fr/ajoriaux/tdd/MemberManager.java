@@ -40,4 +40,9 @@ public class MemberManager {
     	Member member = dbMemberDataService.getMember(code);
     	return member;
     }
+    
+    public boolean removeMember(String code) {
+    	dbMemberDataService.removeMember(code);
+    	return true;
+    }
 }

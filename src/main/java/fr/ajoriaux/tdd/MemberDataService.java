@@ -6,4 +6,6 @@ public interface MemberDataService {
     void updateMember(Member member);
     
     Member getMember(String code);
+    
+    void removeMember(String code);
 }
