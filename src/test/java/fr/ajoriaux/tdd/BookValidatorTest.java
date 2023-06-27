@@ -39,7 +39,7 @@ class BookValidatorTest {
 	@Test
 	public void formatMustBeValidForCreation() {
 		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "format", true);
-		manager.setNewBook(book);;
+		manager.setNewBook(book);
 		assertFalse(manager.setNewBook(book));
 	}
 	
@@ -48,7 +48,7 @@ class BookValidatorTest {
 		String isbn = "2714493238";
 		Book book = new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
 		when(webService.getBookData(isbn)).thenReturn(book);
-		manager.setNewBook(new Book(isbn, "", "", "", "", true));
+		manager.setNewBook(new Book(isbn, "", "", "", "Broché", true));
 		verify(webService).getBookData(isbn);
 		verify(dbService).addBook(book);
 		assertTrue(manager.setNewBook(book));

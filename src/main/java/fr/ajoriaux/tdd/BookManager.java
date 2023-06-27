@@ -16,6 +16,7 @@ public class BookManager {
     public void setWebBookDataService(BookDataService webService) {
     	this.webBookDataService = webService;
     }
+    
     public String getLocator(String isbn) throws NotFoundException {
         Book book = dbBookDataService.getBookData(isbn);
         if (book == null) {
@@ -29,10 +30,14 @@ public class BookManager {
     }
     
     public boolean setNewBook(Book book) {
-    	if ("" == book.getTitle() || "" == book.getAuthor() ||
-    		"" == book.getAuthor() || "" == book.getFormat()) {
+    	if (book.getFormat() != "Poche" && book.getFormat() != "Broché" && book.getFormat() != "Grand Format") {
+    		return false;
+    	}
+    	
+    	if ("" == book.getTitle() || "" == book.getAuthor() || "" == book.getAuthor()) {
     		book = webBookDataService.getBookData(book.getIsbn());
     	}
+    	
     	dbBookDataService.addBook(book);
     	return true;
     }
