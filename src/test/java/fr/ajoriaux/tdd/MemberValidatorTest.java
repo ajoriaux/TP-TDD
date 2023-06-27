@@ -32,9 +32,9 @@ class MemberValidatorTest {
 	/// Ajout d'un adhérent 
 	@Test
 	public void addMemberToDatabase() {
-		Member member = new Member('MEM1', 'Henry', 'Thierry', new Date(1984, 4, 8), "M");
-		manager.addMember();
-		verify(dbService).createMember();
-		assertTrue(manager.addMember());
+		Member member = new Member("MEM1", "Henry", "Thierry", new Date(1984, 4, 8), "M");
+		manager.addMember(member);
+		verify(dbService).createMember(member);
+		assertTrue(manager.addMember(member));
 	}
 }
