@@ -48,6 +48,15 @@ class BookValidatorTest {
 	}
 	
 	@Test
+	public void searchBookInDatabaseByAuthor() {
+		String author = "Douglas Kennedy";
+		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
+		when(dbService.getBookDataByAuthor(author)).thenReturn(book);
+		manager.searchBookByAuthor(author);
+		assertEquals(book, dbService.getBookDataByAuthor(author));
+	}
+	
+	@Test
 	public void formatMustBeValidForCreation() {
 		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "format", true);
 		manager.setNewBook(book);
