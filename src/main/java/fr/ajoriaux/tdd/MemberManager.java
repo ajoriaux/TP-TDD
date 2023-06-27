@@ -15,4 +15,9 @@ public class MemberManager {
     	dbMemberDataService.createMember(member);
     	return true;
     }
+
+    public Member searchMemberByCode(String code) {
+    	Member member = dbMemberDataService.getMember(code);
+    	return member;
+    }
 }
