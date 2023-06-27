@@ -27,6 +27,11 @@ public class BookManager {
 		return book;
     }
     
+    public Book searchBookByAuthor(String author) {
+        Book book = dbBookDataService.getBookDataByAuthor(author);
+		return book;
+    }
+    
     public boolean setNewBook(Book book) {
     	if (book.getFormat() != "Poche" && book.getFormat() != "Broché" && book.getFormat() != "Grand Format") {
     		return false;
