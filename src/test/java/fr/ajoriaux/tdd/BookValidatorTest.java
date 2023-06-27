@@ -37,6 +37,13 @@ class BookValidatorTest {
 	}
 	
 	@Test
+	public void formatMustBeValidForCreation() {
+		Book book = new Book("2714493238", "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "format", true);
+		manager.setNewBook(book);;
+		assertFalse(manager.setNewBook(book));
+	}
+	
+	@Test
 	public void searchWebServiceIfDataMissingDuringCreation() {
 		String isbn = "2714493238";
 		Book book = new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
