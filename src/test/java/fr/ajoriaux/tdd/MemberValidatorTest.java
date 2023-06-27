@@ -53,6 +53,7 @@ class MemberValidatorTest {
 		  String code = "MEM1"; 
 		  Member oldMember = new Member(code, "Henry", "Thierry", new Date(1984, 4, 8), "M");
 		  Member member = new Member(code, "Henry", "Pauline", new Date(1984, 4, 8), "Mme");
+		  when(dbService.getMember(code)).thenReturn(member);
 		  manager.updateMember(member); 
 		  verify(dbService).updateMember(member);
 		  assertTrue(manager.updateMember(member));
