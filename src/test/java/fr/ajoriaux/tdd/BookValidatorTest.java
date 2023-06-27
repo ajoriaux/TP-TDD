@@ -30,11 +30,11 @@ class BookValidatorTest {
 	}
 	
 	@Test
-	public void bookInDatabase() throws NotFoundException {
+	public void searchBookInDatabaseByIsbn() throws NotFoundException {
 		String isbn = "2714493238";
 		Book book = new Book(isbn, "Et c'est ainsi que nous vivrons", "Douglas Kennedy", "Belfond", "Broché", true);
 		when(dbService.getBookData(isbn)).thenReturn(book);
-		manager.getLocator(isbn);
+		manager.searchBookByIsbn(isbn);
 		assertEquals(book, dbService.getBookData(isbn));
 	}
 	

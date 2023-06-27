@@ -17,16 +17,13 @@ public class BookManager {
     	this.webBookDataService = webService;
     }
     
-    public String getLocator(String isbn) throws NotFoundException {
+    public Book searchBookByIsbn(String isbn) throws NotFoundException {
         Book book = dbBookDataService.getBookData(isbn);
         if (book == null) {
         	book = webBookDataService.getBookData(isbn);
         }
         if (book == null) throw new NotFoundException();
-        String locator = isbn.substring(isbn.length() - 4)
-                + book.getAuthor().charAt(0)
-                + book.getTitle().split(" ").length;
-        return locator;
+        return book;
     }
     
     public boolean setNewBook(Book book) {
