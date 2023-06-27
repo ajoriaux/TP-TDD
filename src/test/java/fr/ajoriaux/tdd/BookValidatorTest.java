@@ -64,5 +64,13 @@ class BookValidatorTest {
 		manager.updateBook(book);
 		verify(dbService).getBookData(isbn);
 		assertFalse(manager.updateBook(book));
-	}	
+	}
+	
+	@Test
+	public void removeBookFromDatabase() {
+		String isbn = "2714493238";
+		manager.removeBook(isbn);
+		verify(dbService).removeBook(isbn);
+		assertTrue(manager.removeBook(isbn));
+	}
 }
