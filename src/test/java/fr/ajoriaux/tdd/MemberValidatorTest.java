@@ -4,15 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -67,5 +64,5 @@ class MemberValidatorTest {
 		manager.removeMember(code);
 		verify(dbService).removeMember(code);
 		assertTrue(manager.removeMember(code));
-	}	 
+	}
 }
