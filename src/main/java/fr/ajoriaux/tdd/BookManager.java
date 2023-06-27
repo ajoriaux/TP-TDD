@@ -17,13 +17,14 @@ public class BookManager {
     	this.webBookDataService = webService;
     }
     
-    public Book searchBookByIsbn(String isbn) throws NotFoundException {
+    public Book searchBookByIsbn(String isbn) {
         Book book = dbBookDataService.getBookData(isbn);
-        if (book == null) {
-        	book = webBookDataService.getBookData(isbn);
-        }
-        if (book == null) throw new NotFoundException();
-        return book;
+		return book;
+    }
+    
+    public Book searchBookByTitle(String title) {
+        Book book = dbBookDataService.getBookDataByTitle(title);
+		return book;
     }
     
     public boolean setNewBook(Book book) {
